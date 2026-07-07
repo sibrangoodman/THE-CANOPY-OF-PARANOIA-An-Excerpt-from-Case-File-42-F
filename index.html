@@ -80,7 +80,6 @@
             100% { transform: rotateY(0deg); opacity: 1; }
         }
 
-        /* Dynamic Candlelight Flickering Animation */
         @keyframes candleGlow {
             0% { filter: brightness(0.92) sepia(20%); box-shadow: inset 15px 0 35px rgba(0,0,0,0.2), 0 15px 40px rgba(0,0,0,0.8); }
             20% { filter: brightness(0.96) sepia(15%); }
@@ -90,7 +89,6 @@
             100% { filter: brightness(0.97) sepia(15%); }
         }
 
-        /* Subtle Embedded Blood Spray Overlay */
         .blood-splatter {
             position: absolute;
             top: 30px;
@@ -138,7 +136,6 @@
             color: #2b2720;
         }
 
-        /* Document/Media Boxes */
         .transcript-box, .diary-box {
             font-family: var(--font-mono);
             background-color: rgba(0, 0, 0, 0.06);
@@ -184,7 +181,6 @@
             margin-bottom: 0;
         }
 
-        /* Desktop Nav Controls Below Book */
         .nav-controls {
             display: flex;
             justify-content: space-between;
@@ -204,6 +200,7 @@
             letter-spacing: 1px;
             transition: all 0.2s ease;
             border-radius: 2px;
+            z-index: 20;
         }
 
         .book-btn:hover:not(:disabled) {
@@ -243,7 +240,7 @@
             <p>EXCERPT FROM CASE FILE 42-F // EVIDENCE RECORD</p>
         </header>
         <h2>I. The Anatomy of an Unraveling</h2>
-        <p>To understand the horrific culmination of the Northern Forest incident, one must look past the clinical forensic reports and examine the raw, chronological media left behind on a single, mud-splattered digital camera. The device, recovered forty yards from the final campsite, contained exactly forty-seven minutes of fragmented, chaotic video.</p>
+        <p>To understand the horrific culmination of the Northern Forest incident, one must look past the clinical forensic reports and examine the raw, chronological media left behind on a single, mud splattered digital camera. The device, recovered forty yards from the final campsite, contained exactly forty-seven minutes of fragmented, chaotic video.</p>
         <p>The six men who walked into the uncharted timber on July 6th Mehraaj, Zeehaq, Akeel, Sibran, Zeeshan, and Jibran were good friends. They were urbanites, ill prepared for the sheer, deafening silence of an ancient canopy. Throughout the early footage, it is Sibran who holds the camera, acting as the primary documentarian of the trip. The videos are far from professional; they are raw, heavily shaky clips, fumbled pans, and rushed recordings that capture the unedited reality of the wilderness.</p>
         <p>The day of July 6th started with a relaxed, carefree energy. Sibran’s shaky lens catches the group stripping down and diving into a crystal clear mountain river, swimming and chilling, completely untethered from their normal lives. Afterward, they spent the evening unwinding by a massive campfire.</p>
     </div>
@@ -328,7 +325,6 @@
 </div>
 
 <script>
-    // Page Turning Logic
     let currentPage = 1;
     const totalPages = 7;
 
@@ -336,48 +332,112 @@
     const nextBtn = document.getElementById('next-btn');
     const pageNum = document.getElementById('page-num');
 
-    // Spooky Page Synthesizer Logic
-    function playSpookyFlipSound() {
+    let audioCtx = null;
+    let ambientStarted = false;
+
+    // Generates a calming yet deeply eerie loop of background drone and soft rain
+    function startCalmingSpookyAmbient() {
+        if (ambientStarted) return;
+        ambientStarted = true;
+
         try {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) return;
-            const ctx = new AudioContext();
-            
-            // Generate raw white noise for paper texture friction
-            const bufferSize = ctx.sampleRate * 0.4; // 0.4 seconds long
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            audioCtx = new AudioContext();
+
+            // 1. Deep Sub-Oscillators for Unsettling/Calming Drone
+            const osc1 = audioCtx.createOscillator();
+            const osc2 = audioCtx.createOscillator();
+            const droneGain = audioCtx.createGain();
+
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(55, audioCtx.currentTime); // Low A Note
+            osc2.type = 'triangle';
+            osc2.frequency.setValueAtTime(55.5, audioCtx.currentTime); // Destabilizing detune
+
+            droneGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+            droneGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 3.0); // Smooth volume fade-in
+
+            // Filter out harsh high frequencies from the oscillators
+            const droneFilter = audioCtx.createBiquadFilter();
+            droneFilter.type = 'lowpass';
+            droneFilter.frequency.setValueAtTime(120, audioCtx.currentTime);
+
+            osc1.connect(droneFilter);
+            osc2.connect(droneFilter);
+            droneFilter.connect(droneGain);
+            droneGain.connect(audioCtx.destination);
+
+            osc1.start();
+            osc2.start();
+
+            // 2. Continuous Soft Rain Hiss (White Noise Generator)
+            const bufferSize = audioCtx.sampleRate * 2;
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            const rainSource = audioCtx.createBufferSource();
+            rainSource.buffer = noiseBuffer;
+            rainSource.loop = true;
+
+            const rainFilter = audioCtx.createBiquadFilter();
+            rainFilter.type = 'bandpass';
+            rainFilter.frequency.setValueAtTime(450, audioCtx.currentTime); // Makes noise sound like rain falling on trees
+            rainFilter.Q.setValueAtTime(1.0, audioCtx.currentTime);
+
+            const rainGain = audioCtx.createGain();
+            rainGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+            rainGain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 4.0); // Soft, non-distracting volume
+
+            rainSource.connect(rainFilter);
+            rainFilter.connect(rainGain);
+            rainGain.connect(audioCtx.destination);
+
+            rainSource.start();
+
+        } catch (e) {
+            console.log("Ambient initialization waiting for direct click event.");
+        }
+    }
+
+    // Page Turning Quick Noise
+    function playSpookyFlipSound() {
+        if (!audioCtx) return;
+        try {
+            const bufferSize = audioCtx.sampleRate * 0.4;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const data = buffer.getChannelData(0);
             for (let i = 0; i < bufferSize; i++) {
                 data[i] = Math.random() * 2 - 1;
             }
             
-            const noiseNode = ctx.createBufferSource();
+            const noiseNode = audioCtx.createBufferSource();
             noiseNode.buffer = buffer;
 
-            // Spooky Low Pass Filter (Removes sharp hiss, makes it a deep, ancient whisper rustle)
-            const filter = ctx.createBiquadFilter();
+            const filter = audioCtx.createBiquadFilter();
             filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(350, ctx.currentTime);
-            filter.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.4);
+            filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.4);
 
-            // Volume Envelope (Quick fade in, dusty decay)
-            const gainNode = ctx.createGain();
-            gainNode.gain.setValueAtTime(0.01, ctx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.05);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.04);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
 
-            // Connections
             noiseNode.connect(filter);
             filter.connect(gainNode);
-            gainNode.connect(ctx.destination);
+            gainNode.connect(audioCtx.destination);
 
             noiseNode.start();
-        } catch (e) {
-            console.log("Audio contextual trigger blocked by browser gesture controls.");
-        }
+        } catch (e) {}
     }
 
     function updatePages() {
+        // Start background sound on user interface movement
+        startCalmingSpookyAmbient();
+
         document.querySelectorAll('.book-page').forEach(page => page.classList.remove('active'));
         document.getElementById(`page-${currentPage}`).classList.add('active');
         
@@ -385,10 +445,7 @@
         prevBtn.disabled = currentPage === 1;
         nextBtn.disabled = currentPage === totalPages;
         
-        // Auto-scroll screen gracefully back to the top of the book on page turn
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Trigger sound effect
         playSpookyFlipSound();
     }
 
