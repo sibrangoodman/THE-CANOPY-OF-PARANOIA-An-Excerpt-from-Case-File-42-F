@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CANOPY OF PARANOIA: Case File 42-F</title>
+    <style>
+        :root {
+            --bg-color: #0b0d0f;
+            --panel-bg: #12161a;
+            --text-color: #c9d1d9;
+            --accent-color: #da3633;
+            --muted-color: #8b949e;
+            --border-color: #21262d;
+            --font-serif: 'Georgia', serif;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-serif);
+            line-height: 1.8;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .archive-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 40px 0;
+        }
+
+        header {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: #f0f6fc;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #f0f6fc;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+
+        .transcript-box, .diary-box {
+            font-family: var(--font-mono);
+            background-color: #07090b;
+            border-left: 3px solid var(--muted-color);
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            white-space: pre-line;
+            color: #8bb8d0;
+        }
+
+        .diary-box {
+            border-left-color: var(--accent-color);
+            color: #e57373;
+        }
+
+        .diary-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+
+        .investigator-note {
+            background-color: rgba(218, 54, 51, 0.05);
+            border: 1px dashed var(--accent-color);
+            padding: 25px;
+            border-radius: 4px;
+            margin-top: 50px;
+        }
+
+        .investigator-note h3 {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .investigator-note p {
+            font-size: 0.95rem;
+            color: var(--muted-color);
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            .archive-container {
+                padding: 20px;
+                margin: 10px 0;
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="archive-container">
+    <header>
+        <h1>The Canopy of Paranoia</h1>
+        <p>EXCERPT FROM CASE FILE 42-F // DECLASSIFIED</p>
+    </header>
+
+    <section class="visible">
+        <h2>I. The Anatomy of an Unraveling</h2>
+        <p>To understand the horrific culmination of the Northern Forest incident, one must look past the clinical forensic reports and examine the raw, chronological media left behind on a single, mud-splattered digital camera. The device, recovered forty yards from the final campsite, contained exactly forty-seven minutes of fragmented, chaotic video.</p>
+        <p>The six men who walked into the uncharted timber on July 6th—Mehraaj, Zeehaq, Akeel, Sibran, Zeeshan, and Jibran—were good friends. They were urbanites, ill-prepared for the sheer, deafening silence of an ancient canopy. Throughout the early footage, it is Sibran who holds the camera, acting as the primary documentarian of the trip. The videos are far from professional; they are raw, heavily shaky clips, fumbled pans, and rushed recordings that capture the unedited reality of the wilderness.</p>
+        <p>The day of July 6th started with a relaxed, carefree energy. Sibran’s shaky lens catches the group stripping down and diving into a crystal-clear mountain river, swimming and chilling, completely untethered from their normal lives. Afterward, they spent the evening unwinding by a massive campfire. There were no modern conveniences here; they relied entirely on wood they gathered from the forest floor to burn things and cook their food. Zeeshan, the designated cook of the team, diligently managed the fire building and handled the raw ingredients over the open flames, while Mehraaj actively helped him gather heavy logs and lay out the hearth.</p>
+        <p>But as the sun dipped below the horizon on that very same day—July 6th—the trip took a harsh, sudden turn. A suffocating, heavy fog rolled in with the night, trapping the heat and the tension. Looking closely at the shaky footage Sibran captured under the dim firelight, the cracks were already showing. Zeehaq was a quiet guy who struggled deeply with communication, often finding it hard to articulate his thoughts or blend in with the fluid, fast-paced humor of the rest of the group. This social awkwardness made him seem a little bit detached from the very start. While the others huddled near the heat of the fire Zeeshan built, Zeehaq sat slightly outside the circle on a fallen log, staring silently into the embers. In the isolation of the dark woods, that slight distance quickly began to feel like a shadow.</p>
+        <p>When the search and rescue teams discovered the campsite weeks later, the bodies were heavily decomposed. However, according to the final forensic and autopsy reports, the investigators were able to establish a precise, terrifying timeline. Every single murder took place within a single, continuous night, stretching from the late evening of July 6th to the pre-dawn hours of July 7th. By the time the morning sun broke through the canopy on July 7th, the forest was entirely silent. Nobody was alive anymore.</p>
+    </section>
+
+    <section>
+        <h2>II. The First Absence: Zeehaq (Forensic TOD: July 6, 9:15 PM)</h2>
+        <p>The nightmare officially began in the dark of July 6th. According to the recovered camera data, the group realized Zeehaq was missing just as the fire began to burn down to coals. Sibran’s shaky lens records a frantic, unorganized search into the immediate pitch black, the footage bouncing wildly and blurring as they scramble down a steep incline with their flashlights, their voices cracking as they shout Zeehaq's name into the dense timber.</p>
+        <p>It was Sibran himself who found him.</p>
+        <p>At the base of a jagged, sixty-foot rocky ravine lay Zeehaq. The footage from this moment is pure chaos; the camera violently whips around before dropping into the ferns as Sibran runs forward, leaving the lens tracking a patch of gray sky while the audio logs the collective psychological collapse of the group. Jibran is screaming incoherently. Sibran frantically calls for a pulse he will never find. Through it all, Mehraaj’s voice is heard low, flat, and chillingly controlled commanding everyone to step back and breathe.</p>
+    </section>
+
+    <section>
+        <h2>III. The Scapegoat (Forensic TOD: July 6, 11:30 PM)</h2>
+        <p>The tragedy of the incident lies in how naturally suspicion found a home. Akeel, completely paralyzed by the sight of Zeehaq’s body, began to hyperventilate. When Jibran reached out to steady him, Akeel violently recoiled, screaming at the group to keep their hands off him.</p>
+        <p>Back at the camp as a sudden, torrential downpour began to drown their fire, Akeel became hyper defensive. He locked himself in his tent, emerging only to pace the perimeter with wide, unblinking eyes. He admitted to hearing "heavy footsteps" outside his tent just before they noticed Zeehaq was gone, but claimed he stayed quiet because he assumed it was a wild animal. To the remaining four, who were desperately searching for a rational explanation for why Zeehaq would walk out to a cliff barefoot in the dark, Akeel’s intense trauma and defensive lashing out looked exactly like guilt.</p>
+        <p>The air inside the camp became toxic with unvoiced accusations. No one ate Zeeshan's food; no one slept.</p>
+        <p>Just a few hours later, at 11:30 PM, a brief, wet scuffle broke out outside the main tent. Sibran, waking to the noise, fumbled the camera on just in time to capture a shaky, sweeping beam of his flashlight cutting through the downpour.</p>
+        <p>Akeel was found dead near the camp's water supply. He had been stabbed repeatedly with a thick, heavy-duty survival blade. The realization hit the survivors like a physical blow: Akeel wasn't being defensive because he was the killer. He was defensive because he knew someone in that camp was hunting them.</p>
+    </section>
+
+    <section>
+        <h2>IV. Sibran’s Deduction & Death (Forensic TOD: July 7, 1:45 AM)</h2>
+        <p>While Zeeshan and Jibran lapsed into a near-catatonic state of grief in the tent, Sibran detached himself from the emotion. He sat in the corner, quietly reviewing the timeline of the night on his fingers, keeping the digital camera close.</p>
+        <p>The book details a secret conversation recorded accidentally on a low quality voice memo app on Sibran’s phone, which was found in his pocket weeks later. He had pulled Zeeshan and Jibran behind the supply tarps while Mehraaj was away from the logs gathering extra firewood in the dark.</p>
+        
+        <div class="transcript-box">
+            <strong>AUDIO TRANSCRIPT: EVIDENCE FILE #09-B</strong>
+            SIBRAN: (Urgently) Listen to me. Stop crying and listen. Who was awake both times? Who didn't leave his tent until after the noise stopped? Mehraaj. He’s too calm. He’s treating this like a everyday problem. He’s leading us around like sheep, and you guys are letting him.
+            ZEESHAN: Shut up, Sibran. Just shut up. Mehraaj is the only one helping me keep the camp functioning. You’re losing your mind.
+            JIBRAN: You’re making it worse. Leave it alone.
+        </div>
+
+        <p>Sibran’s deduction was flawless, but his isolation was absolute. They pushed him away, treating his clarity as a symptom of the forest’s madness.</p>
+        <p>Sibran’s body was discovered just two hours later, around 1:45 AM on July 7th, lying fifty yards out in a patch of crushed hemlock after what forensics described as a desperate, chaotic struggle for his life. The video camera was found dropped in the mud nearby, switched off.</p>
+    </section>
+
+    <section>
+        <h2>V. The Documented Truth</h2>
+        <p>When Mehraaj, Zeeshan, and Jibran stood over Sibran's body in the pitch black, the seed Sibran had planted finally bloomed. Zeeshan looked at Mehraaj’s hands. Jibran checklist mapped the camp and refused to stand within arm's reach of him. Mehraaj saw the shift in their eyes; he knew the mask had slipped.</p>
+        <p>The ultimate breakthrough in the case came from a hollowed out tree root near Sibran's body, used as a supply cache. Hidden inside a waterproof plastic pouch was a small, black leather journal belonging to Mehraaj. Written in a meticulously neat, unwavering hand, the journal laid bare the mechanics of the slaughter. Crucially, the entries revealed a massive forensic detail: Mehraaj explicitly noted that he had brought only one survival knife on the trip, keeping it entirely concealed from the others. He was the only one armed.</p>
+        <p>The entries were all scrawled in quick succession that night, documenting the fire-rapid executions as they happened:</p>
+
+        <div class="diary-box">
+            <div class="diary-title">Extract From The Recovered Diary of Mehraaj:</div>
+            <strong>July 6 (Late Evening):</strong> "Zeehaq struggled so much just to talk to us. He was always detached, floating on the edges of the group. It made him the perfect starting point. It took very little effort to lead him out to the edge of the ravine in the mist. The dark did the rest. A simple push. The sound he made at the bottom was brief. The others think it was an accident. They are so beautifully blind."
+
+            <strong>July 6 (Midnight):</strong> "They have chosen Akeel as their monster. It is perfect. His fear is doing my work for me. I silenced him by the stream tonight with the knife while the rain covered the noise. When they find him, the panic will peak. They are breaking down. They cannot look at each other."
+
+            <strong>July 7 (Early AM):</strong> "Sibran is looking at me differently. He is something. He has been counting the minutes, looking at the tracks in the mud. He is even using that camera to track my movements. I can see the realization in his eyes. He must be taken off the board before he convinces Zeeshan and Jibran. Tonight, I stop him."
+        </div>
+    </section>
+
+    <section>
+        <h2>VI. The Perfect Alibi from the Grave (Forensic TOD: July 7, ~3:30 AM)</h2>
+        <p>The final footage on the camera is a three minute clip from roughly 2:30 AM on July 7th, picked up and turned on by Zeeshan. The video is incredibly shaky, catching sweeping, frantic frames of the dark forest. Zeeshan and Jibran are screaming at Mehraaj, their voices cracking with raw terror. Mehraaj, backed against a tree, realizes he is outnumbered. He doesn't fight; he turns and bolts into the pitch black woods.</p>
+        <p>According to forensic reconstruction, Mehraaj died at approximately 3:30 AM. In his blind, unlighted panic through the dense forest, he had tripped and fallen forward directly into a jagged, broken branch structure, impaling himself through the chest.</p>
+        <p>Jibran and Zeeshan tracked the noise of the thrashing body through the brush, only to find Mehraaj dead. But to them, standing over the lifeless body of the mastermind in the dark, it was the ultimate deception.</p>
+        <p>The psychological virus Mehraaj left behind was fatal. They looked at his corpse and thought: If Mehraaj is dead, he couldn't have been the killer. Sibran was wrong. The real murderer is still standing right here.</p>
+        <p>The final entries of the case file detail the grimmest reality of all. With only two men left alive, the math was brutal. Zeeshan was entirely convinced Jibran was the butcher; Jibran was certain Zeeshan had orchestrated it all. They had no knives left—the single survival blade was still lost in the dark woods where Mehraaj had dropped it—so they used what they had. Blunt camping tools and rocks.</p>
+        <p>The autopsy reports concluded that Zeeshan and Jibran died within minutes of each other around 5:00 AM on July 7th from mutual, catastrophic blunt force injuries.</p>
+        <p>Mehraaj was the monster. But by dying fourth, he executed the perfect alibi. He did not have to lift a finger against the last two survivors; the mere ghost of his presence was enough to make his best friends butcher each other in the dirt before the sun could even rise on July 7th. Everything was gone, and by morning, nobody was left alive.</p>
+    </section>
+
+    <div class="investigator-note">
+        <h3>INVESTIGATOR NOTE:</h3>
+        <p>While the dates (July 6th–7th) are absolute and verified by core biological data, the specific timestamps noted throughout this document (e.g., 9:15 PM, 11:30 PM, 1:45 AM) represent highly educated forensic estimates. Because the bodies were recovered weeks after the incident, environmental exposure created a margin of error. These times are reconstructed based on the digital camera's internal clock, phone audio logs, liver temperature modeling, and the chronological progression of Mehraaj's recovered journal. They reflect the official investigators' consensus on how the night unfolded, rather than absolute, down-to-the-minute certainties.</p>
+    </div>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('section');
+    const options = { threshold: 0.1 };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+</script>
+
+</body>
+</html>
