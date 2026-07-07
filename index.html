@@ -236,7 +236,6 @@
 <div class="ambient-darkness"></div>
 
 <div class="book-wrapper">
-    <!-- PAGE 1 -->
     <div class="book-page active" id="page-1">
         <svg class="blood-splatter" viewBox="0 0 100 100" fill="#540101"><path d="M10,20 Q25,50 15,80 Q40,55 70,70 Q55,40 80,10 Q45,25 10,20 Z"/></svg>
         <header>
@@ -249,7 +248,6 @@
         <p>The day of July 6th started with a relaxed, carefree energy. Sibran’s shaky lens catches the group stripping down and diving into a crystal-clear mountain river, swimming and chilling, completely untethered from their normal lives. Afterward, they spent the evening unwinding by a massive campfire.</p>
     </div>
 
-    <!-- PAGE 2 -->
     <div class="book-page" id="page-2">
         <p>There were no modern conveniences here; they relied entirely on wood they gathered from the forest floor to burn things and cook their food. Zeeshan, the designated cook of the team, diligently managed the fire building and handled the raw ingredients over the open flames, while Mehraaj actively helped him gather heavy logs and lay out the hearth.</p>
         <p>But as the sun dipped below the horizon on that very same day July 6th the trip took a harsh, sudden turn. A suffocating, heavy fog rolled in with the night, trapping the heat and the tension. Looking closely at the shaky footage Sibran captured under the dim firelight, the cracks were already showing.</p>
@@ -257,7 +255,6 @@
         <p>When the search and rescue teams discovered the campsite weeks later, the bodies were heavily decomposed. However, according to the final forensic and autopsy reports, the investigators were able to establish a precise, terrifying timeline. Every single murder took place within a single, continuous night, stretching from the late evening of July 6th to the pre-dawn hours of July 7th. By the time the morning sun broke through the canopy on July 7th, the forest was entirely silent. Nobody was alive anymore.</p>
     </div>
 
-    <!-- PAGE 3 -->
     <div class="book-page" id="page-3">
         <h2>II. The First Absence: Zeehaq (Forensic TOD: July 6, 9:15 PM)</h2>
         <p>The nightmare officially began in the dark of July 6th. According to the recovered camera data, the group realized Zeehaq was missing just as the fire began to burn down to coals. Sibran’s shaky lens records a frantic, unorganized search into the immediate pitch black, the footage bouncing wildly and blurring as they scramble down a steep incline with their flashlights, their voices cracking as they shout Zeehaq's name into the dense timber.</p>
@@ -265,7 +262,6 @@
         <p>At the base of a jagged, sixty foot rocky ravine lay Zeehaq. The footage from this moment is pure chaos; the camera violently whips around before dropping into the ferns as Sibran runs forward, leaving the lens tracking a patch of gray sky while the audio logs the collective psychological collapse of the group. Jibran is screaming incoherently. Sibran frantically calls for a pulse he will never find. Through it all, Mehraaj’s voice is heard low, flat, and chillingly controlled commanding everyone to step back and breathe.</p>
     </div>
 
-    <!-- PAGE 4 -->
     <div class="book-page" id="page-4">
         <h2>III. The Scapegoat (Forensic TOD: July 6, 11:30 PM)</h2>
         <p>The tragedy of the incident lies in how naturally suspicion found a home. Akeel, completely paralyzed by the sight of Zeehaq’s body, began to hyperventilate. When Jibran reached out to steady him, Akeel violently recoiled, screaming at the group to keep their hands off him.</p>
@@ -275,7 +271,6 @@
         <p>Akeel was found dead near the camp's water supply. He had been stabbed repeatedly with a thick, heavy-duty survival blade. The realization hit the survivors like a physical blow: Akeel wasn't being defensive because he was the killer. He was defensive because he knew someone in that camp was hunting them.</p>
     </div>
 
-    <!-- PAGE 5 -->
     <div class="book-page" id="page-5">
         <h2>IV. Sibran’s Deduction & Death (Forensic TOD: July 7, 1:45 AM)</h2>
         <p>While Zeeshan and Jibran lapsed into a near-catatonic state of grief in the tent, Sibran detached himself from the emotion. He sat in the corner, quietly reviewing the timeline of the night on his fingers, keeping the digital camera close.</p>
@@ -292,7 +287,6 @@
         <p>Sibran’s body was discovered just two hours later, around 1:45 AM on July 7th, lying fifty yards out in a patch of crushed hemlock after what forensics described as a desperate, chaotic struggle for his life. The video camera was found dropped in the mud nearby, switched off.</p>
     </div>
 
-    <!-- PAGE 6 -->
     <div class="book-page" id="page-6">
         <h2>V. The Documented Truth</h2>
         <p>When Mehraaj, Zeeshan, and Jibran stood over Sibran's body in the pitch black, the seed Sibran had planted finally bloomed. Zeeshan looked at Mehraaj’s hands. Jibran checklist mapped the camp and refused to stand within arm's reach of him. Mehraaj saw the shift in their eyes; he knew the mask had slipped.</p>
@@ -309,7 +303,6 @@
         </div>
     </div>
 
-    <!-- PAGE 7 -->
     <div class="book-page" id="page-7">
         <svg class="blood-splatter" viewBox="0 0 100 100" fill="#420000"><path d="M5,5 Q30,20 20,60 Q50,30 80,85 Q60,40 90,5 Q40,15 5,5 Z"/></svg>
         <h2>VI. The Perfect Alibi from the Grave (Forensic TOD: July 7, ~3:30 AM)</h2>
@@ -327,7 +320,6 @@
         </div>
     </div>
 
-    <!-- Navigation Panel -->
     <div class="nav-controls">
         <button class="book-btn" id="prev-btn" disabled>Previous Page</button>
         <div class="page-counter" id="page-num">Page 1 of 7</div>
@@ -344,6 +336,47 @@
     const nextBtn = document.getElementById('next-btn');
     const pageNum = document.getElementById('page-num');
 
+    // Spooky Page Synthesizer Logic
+    function playSpookyFlipSound() {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            
+            // Generate raw white noise for paper texture friction
+            const bufferSize = ctx.sampleRate * 0.4; // 0.4 seconds long
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            const noiseNode = ctx.createBufferSource();
+            noiseNode.buffer = buffer;
+
+            // Spooky Low Pass Filter (Removes sharp hiss, makes it a deep, ancient whisper rustle)
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(350, ctx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.4);
+
+            // Volume Envelope (Quick fade in, dusty decay)
+            const gainNode = ctx.createGain();
+            gainNode.gain.setValueAtTime(0.01, ctx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.05);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+
+            // Connections
+            noiseNode.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(ctx.destination);
+
+            noiseNode.start();
+        } catch (e) {
+            console.log("Audio contextual trigger blocked by browser gesture controls.");
+        }
+    }
+
     function updatePages() {
         document.querySelectorAll('.book-page').forEach(page => page.classList.remove('active'));
         document.getElementById(`page-${currentPage}`).classList.add('active');
@@ -354,6 +387,9 @@
         
         // Auto-scroll screen gracefully back to the top of the book on page turn
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Trigger sound effect
+        playSpookyFlipSound();
     }
 
     prevBtn.addEventListener('click', () => {
